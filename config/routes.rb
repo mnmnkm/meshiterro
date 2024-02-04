@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get "homes/about", to: "homes#about", as: "about"
   resources :post_images, only: [:new, :create, :index, :show, :destroy] do
+    resource :favorite, only: [:create, :destroy] 
+    #resource:単数形にすると、/:idがURLに含まれなくなる。
     resources :post_comments, only: [:create, :destroy] 
     #コメントは投稿画像に対してコメントされ、post_commentsは post_imagesに結びつき親子関係になる
   end
